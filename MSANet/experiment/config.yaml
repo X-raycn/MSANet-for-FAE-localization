@@ -1,0 +1,43 @@
+GPUS: (0, 1, 2, 3)
+OUTPUT_DIR: './result/Detection/runs/'
+LOG_DIR: 'log'
+WORKERS: 16
+PRINT_FREQ: 10
+
+CUDNN:
+  BENCHMARK: true
+  DETERMINISTIC: false
+  ENABLED: true
+
+MODEL:
+  NAME: ab_model_aot_dct_h_1_m_2x4_cbam
+  DESCRIPTION: 28k*5_trainset
+
+LOSS:
+  LAMBDA_PRED: 1
+
+DATASET:
+  ROOT: './CelebA-Attr/CelebA-HQ-AttGAN/'
+  DATA_LIST: './CelebA-Attr/CelebA-HQ-AttGAN/image_list.txt'
+  ATTR_PATH: './CelebA-Attr/CelebA-HQ-AttGAN/list_attr_celeba.txt'
+
+TRAIN:
+  IMAGE_SIZE:
+  - 256
+  - 256
+  BATCH_SIZE: 32
+  SHUFFLE: true
+  BEGIN_EPOCH: 0
+  EPOCHES: 120
+  RESUME: true
+  CONTINUE_PATH: './result/Detection/runs/ab_model_aot_dct_h_1_m_2x4_cbam--2025.12.20-trans--19-33-00'
+  OPTIMIZER: adam
+  LR: 1e-4
+  WEIGHT_DECAY: 0.
+
+TEST:
+  IMAGE_SIZE:
+  - 256
+  - 256
+  BATCH_SIZE: 20
+  NUM_SAMPLES: 2000
